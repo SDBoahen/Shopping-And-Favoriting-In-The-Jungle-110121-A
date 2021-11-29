@@ -1,8 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 
+import { useState } from 'react';
 
 import ItemsList from './ItemsList';
+import ShoppingCartList from './ShoppingCartList';
+
 
 
 function App() {
@@ -15,17 +18,20 @@ function App() {
 
     const itemsArray = [
 
-      { 
+      {
+        id: 1, 
         name: "iPhone",
         imageURL: "http://sciencemadefun.net/blog/wp-content/uploads/2011/12/present-150291_1280-293x300.png"
       }
         ,
-      { 
+      {
+        id: 2, 
         name: "Android Phone",
         imageURL: "http://sciencemadefun.net/blog/wp-content/uploads/2011/12/present-150291_1280-293x300.png"
       }        
         ,
-      { 
+      {
+        id: 3, 
         name: "Google Phone",
         imageURL: "http://sciencemadefun.net/blog/wp-content/uploads/2011/12/present-150291_1280-293x300.png"
       }
@@ -33,6 +39,47 @@ function App() {
 
     ]
     console.log("itemsArray: ", itemsArray)  //
+
+
+    const [ dataForShoppingCart, updateDataInShoppingCart ] = useState( [ ] ) 
+    // const [ dataForShoppingCart, updateDataInShoppingCart ] = useState( 
+    //     [       
+    //       {
+    //         id: 3, 
+    //         name: "Google Phone",
+    //         imageURL: "http://sciencemadefun.net/blog/wp-content/uploads/2011/12/present-150291_1280-293x300.png"
+    //       },
+    //       {
+    //         id: 3, 
+    //         name: "Google Phone",
+    //         imageURL: "http://sciencemadefun.net/blog/wp-content/uploads/2011/12/present-150291_1280-293x300.png"
+    //       } 
+    //   ] 
+    // )
+    console.log("State of dataForShoppingCart: ", dataForShoppingCart)  //
+
+
+
+
+
+    function aItemCardHasBeenClicked(dataFromItemsList){
+
+
+      console.log("dataFromItemsList: ", dataFromItemsList)  //
+
+      // console.log("Hey! An ItemCard Has Been Clicked On!🔔🎶")  //
+
+
+      updateDataInShoppingCart(  [ ...dataForShoppingCart, dataFromItemsList ]  )
+      ////                       [ ].push( dataFromItemsList )
+      // X //
+      // updateDataInShoppingCart( [ dataFromItemsList ] )
+      // updateDataInShoppingCart(   dataFromItemsList   )
+
+
+
+
+    }
 
 
 
@@ -50,8 +97,24 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
 
 
-        <ItemsList itemsArrayFromApp={itemsArray} />
+        <ItemsList 
+          
+          itemsArrayFromApp={itemsArray} 
+          notifyAppThatAItemCardHasBeenClicked={aItemCardHasBeenClicked}
+
+        />
         {/* function ItemsList() */}
+
+
+        <br></br><br></br><br></br><br></br>
+
+
+        <ShoppingCartList 
+        
+          // WeeNeedDataAsAProp
+          itemsArrayFromApp={dataForShoppingCart}
+        
+        />
 
         
       </div>
@@ -66,8 +129,34 @@ export default App;
 
 /*
 
-                                      < App />
-                                        L> < ItemsList /> 
+                                    =========
+
+
+                                    < App /> [ { itemObj }  ](dataForShoppingCart)
+                                    
+                                    
+                                    L> < ItemsList />  < ShoppingCartList />
+                                    
+                                    L> < ItemCard />       < ItemCard /> 
+                                    { itemObj } 
+                                    
+
+                                      ////   <App />   ->->->->->->V
+                                      ////   V    /\               V
+                                      //// <ItemsList />     < ShoppingCartList />
+                                      ////   V    /\
+                                      //// < ItemCard f() />     < ItemCard /> 
+
+                                    ========
+
+
+
+
+                                    < App />
+                                    L> < ItemsList />  *< ShoppingCartList />
+                                        L> < ItemCard />   *< ShoppingCartList />
+                                        *< ShoppingCartList />
+
        
                  < ShoppingCartList />   < ItemCard />
 

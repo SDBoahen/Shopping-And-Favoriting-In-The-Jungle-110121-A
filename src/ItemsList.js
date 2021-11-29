@@ -2,7 +2,7 @@ import ItemCard from "./ItemCard"
 
 
 function ItemsList(props){
-// function ItemsList( { itemsArrayFromApp } ){
+// function ItemsList( { itemsArrayFromApp, notifyAppThatAItemCardHasBeenClicked } ){
 
     console.log("props in ItemsList: ", props.itemsArrayFromAppFromApp)
     // comeback to destructuring with renaming
@@ -13,7 +13,23 @@ function ItemsList(props){
 
 
     //// js
-        console.log("props.itemsArrayFromApp: ", props.itemsArrayFromApp)
+        console.log("props.itemsArrayFromApp: ", props.itemsArrayFromApp)  //
+        
+        
+        
+        
+        
+        // props.notifyItemsListThatIHaveBeenClicked(  props.eachItem  )
+        const ringTheBell =(  dataFromItemCard  )=>{
+            
+            console.log("dataFromItemCard: ", dataFromItemCard)  //
+
+                props.notifyAppThatAItemCardHasBeenClicked( dataFromItemCard )
+            
+            // console.log("Hey! A ItemCard Has Been Clicked On!🔔🎶")  //
+
+        }
+
 
 
 
@@ -21,7 +37,7 @@ function ItemsList(props){
     
             (eachItem)=>{  
             
-            console.log("eachItem -> ", eachItem)  //
+            // console.log("eachItem -> ", eachItem)  //
     
     
             // "Do Something"
@@ -37,6 +53,8 @@ function ItemsList(props){
       console.log(dataFromDotMap)  //
   
   
+
+
       function renderingAsAFunction(){
   
         return(
@@ -49,17 +67,14 @@ function ItemsList(props){
       
       
               // "Do Something"
-              return( <>
-                <ItemCard eachItem={eachItem} />
-                    {/* --------------------------------------------------------
-                    <h3>{eachItem.name}</h3>
-                    <img src={eachItem.imageURL} />
-                    --------------------------------------------------------
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br> */}
-              </>)
+              return(<ItemCard 
+
+                    key={eachItem.id}  // for React
+                    eachItem={eachItem} // for Us
+
+                    notifyItemsListThatIHaveBeenClicked={ringTheBell}
+
+                />)
       
               // return(eachItem.name)
           
@@ -120,6 +135,7 @@ function ItemsList(props){
                 //// abstract process as a function -> invoke thar function
                 renderingAsAFunction()
             }
+
 
 
 
