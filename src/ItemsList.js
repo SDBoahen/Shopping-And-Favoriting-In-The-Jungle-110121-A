@@ -4,8 +4,8 @@ import ItemCard from "./ItemCard"
 function ItemsList(props){
 // function ItemsList( { itemsArrayFromApp, notifyAppThatAItemCardHasBeenClicked } ){
 
-    console.log("props in ItemsList: ", props.itemsArrayFromAppFromApp)
-    // comeback to destructuring with renaming
+    console.log("props in ItemsList: ", props.itemsArrayFromApp)
+    // comeback to destructuring with renaming  ***
 
 
 
